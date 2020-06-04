@@ -1,0 +1,76 @@
+######################
+###  Jason Hughes  ###
+# Programming Final  #
+#### Problem One #####
+######################
+
+from math import pow
+
+
+class Zp:
+
+    def __init__ (self, n, p):
+        self.p = p
+        self.n = n % self.p
+
+    def __add__ (self, other):
+        return Zp((self.n + other.n), self.p)
+
+    def __neg__ (self):
+        return Zp(-self.n, self.p)
+
+    def __sub__ (self, other):
+        return Zp((self.n - other.n), self.p)
+
+    def __str__ (self):
+        return '%i (mod %i)'% (self.n, self.p)
+
+    def __mul__ (self, other):
+        return Zp((self.n * other.n),self.p)
+
+    def __pow__ (self, p):
+        return Zp((self.n ** self.p),self.p)
+
+    def __truediv__ (self, other):
+        return Zp((self.n * (other.n ** self.p - 2)), self.p)
+
+    def atab (self):
+        print('+',end = ' ')
+        for i in range(self.p):
+            print(i,end = ' ')
+        print('\n')
+
+        for k in range(self.p):
+            print(k, end = ' ')
+            for j in range(self.p):
+                w = (k + j) % self.p
+                print(w, end = ' ')
+            print('\n')
+
+    def mtab (self):
+        print('*',end = ' ')
+        for i in range(self.p):
+            print(i,end = ' ')
+        print('\n')
+
+        for k in range(self.p):
+            print(k, end = ' ')
+            for j in range(self.p):
+                w = (k * j) % self.p
+                print(w, end = ' ')
+            print('\n')
+    
+
+
+a = Zp(3,5)
+b = Zp(4,5)
+print('a: ',a)
+print('b: ',b)
+print('+ ',a+b)
+print('- ',a-b)
+print('* ',a*b)
+print('/ ',a/b)
+print('** ',a**b)
+a.atab()
+print('\n')
+a.mtab()
